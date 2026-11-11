@@ -31,3 +31,6 @@ dist-ssr
 
 # typescript
 *.tsbuildinfo
+
+# Generated visual inspection captures
+.taste-skill/inspect/

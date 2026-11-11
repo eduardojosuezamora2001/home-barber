@@ -1,0 +1,9 @@
+| Correo | Escenario |
+|---|---|
+| cliente.nuevo@example.com | Sin visitas; probar bienvenida |
+| cliente.nuevo@example.com | Sin visitas; probar bienvenida |
+| cliente.frecuente@example.com | 4 visitas; la siguiente genera recompensa |
+| cliente.cupones@example.com | Cupones disponible, canjeado y vencido |
+| cliente.referidor@example.com | Cliente que invita |
+| cliente.invitado@example.com | Sin visitas; puede registrar una invitación |
+| cliente.referido@example.com | Primera visita completada y referido recompensado |

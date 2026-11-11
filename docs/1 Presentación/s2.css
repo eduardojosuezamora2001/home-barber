@@ -1,0 +1,36 @@
+/* ===== Piezas compartidas de la Sesión 2 (se carga después de engine.css) ===== */
+.a{position:absolute!important}
+.h2{font-size:56px;max-width:24ch}
+p.tx,.tx{font-size:26px;line-height:1.35;max-width:none}
+p.why2,.why2{font:500 22px/1.35 var(--f-body);color:#4A4A46;max-width:none}
+.lbl2{font:900 20px/1 var(--f-cond);font-stretch:80%;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+/* franja «En su trabajo:» (igual que la Sesión 1) */
+.job{box-sizing:border-box;display:flex;align-items:center;gap:18px;background:var(--ink);color:#fff;padding:14px 22px 14px 14px;font:600 23px/1.32 var(--f-body);max-width:none}
+.job .k{flex:none;background:var(--yellow);color:var(--ink);font:900 21px/1 var(--f-cond);font-stretch:85%;text-transform:uppercase;letter-spacing:.03em;padding:9px 12px}
+/* franja «Para construir con IA:» (nueva en la Sesión 2) */
+.build{box-sizing:border-box;display:flex;align-items:center;gap:18px;background:#fff;color:var(--ink);padding:12px 22px 12px 12px;font:600 23px/1.32 var(--f-body);border:4px solid var(--ink);max-width:none}
+.build .k{flex:none;background:var(--blue);color:#fff;font:900 21px/1 var(--f-cond);font-stretch:85%;text-transform:uppercase;letter-spacing:.03em;padding:9px 12px}
+p.job.a,p.build.a{top:auto!important;bottom:56px}
+/* fuente citada, abajo a la derecha */
+.src{position:absolute;right:90px;bottom:16px;font:700 18px/1.2 var(--f-cond);font-stretch:85%;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);max-width:none;text-align:right}
+/* números con etiqueta */
+.n{display:inline-flex;flex-direction:column;align-items:center;gap:4px;font:900 44px/1 var(--f-cond);font-stretch:85%;font-variant-numeric:tabular-nums}
+.n small{font:700 20px/1.1 var(--f-body);color:var(--muted);font-stretch:100%;white-space:nowrap}
+.n.r{background:var(--ink);color:#fff;padding:8px 16px 10px}.n.r small{color:#D8D8D2}
+.n.g{background:var(--good);color:#fff;padding:8px 16px 10px}.n.g small{color:#E4F6EC}
+.n.b{background:var(--bad);color:#fff;padding:8px 16px 10px}.n.b small{color:#FFE2DF}
+.eq{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.eq .o{font:500 36px/1 var(--f-cond);color:var(--muted)}
+.eqw{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:700 22px/1.2 var(--f-body)}
+.eqw span{background:#fff;padding:9px 14px}
+.eqw i{font-style:normal;color:var(--muted);font-weight:500;font-size:26px}
+/* tarjeta con borde superior de color */
+.tick{border-top:8px solid var(--orange);background:#fff;padding:18px 22px;display:flex;flex-direction:column;gap:8px}
+.tick .nm{font:900 26px/1.05 var(--f-cond);font-stretch:85%;text-transform:uppercase}
+.tick p{font-size:21px;line-height:1.35;max-width:none}
+/* opcional: marca de lámina que se puede saltar */
+.opt-tag{position:absolute;right:90px;top:60px;font:900 20px/1 var(--f-cond);font-stretch:85%;letter-spacing:.06em;text-transform:uppercase;border:3px dashed var(--muted);color:var(--muted);padding:6px 10px}
+
+/* revisión 1: letra mínima y contraste */
+:root{--green:#23955F}
+.tag{font-size:20px}
