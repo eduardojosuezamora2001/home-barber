@@ -1,5 +1,5 @@
 /** Memory cache for public data only. Invalidation also isolates in-flight loads. */
-export function createPublicCache<T>(ttlMs: number) {
+export function createPublicCache<T>(ttlMs: number, { deduplicate = true } = {}) {
   let generation = 0
   let cached: { value: T; until: number } | undefined
   let pending: Promise<T> | undefined
@@ -7,13 +7,13 @@ export function createPublicCache<T>(ttlMs: number) {
   return {
     get(loader: () => Promise<T>): Promise<T> {
       if (cached && cached.until > Date.now()) return Promise.resolve(cached.value)
-      if (pending) return pending
+      if (deduplicate && pending) return pending
       const startedAt = generation
       const request = loader().then((value) => {
         if (generation === startedAt) cached = { value, until: Date.now() + ttlMs }
         return value
       }).finally(() => { if (pending === request) pending = undefined })
-      pending = request
+      if (deduplicate) pending = request
       return request
     },
     invalidate() {

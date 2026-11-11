@@ -2,10 +2,12 @@ import type { SupabaseClient } from "@supabase/supabase-js"
 import { unwrap } from "./db.js"
 import { database } from "./db.js"
 import { createPublicCache } from "./cache.js"
+import { config } from "./config.js"
 
 type Catalog = Record<"branches" | "branchHours" | "services" | "barbers" | "barberBranches" | "barberHours" | "barberBlocks", unknown[]>
 
-const cache = createPublicCache<Catalog>(15_000)
+// Workers can reuse settled public values, but not I/O promises from another request.
+const cache = createPublicCache<Catalog>(15_000, { deduplicate: !config.cloudflare })
 const publicDb = database()
 
 async function queryCatalog(db: SupabaseClient, publicOnly = false): Promise<Catalog> {

@@ -33,6 +33,18 @@ test("failed catalog loads are not retained", async () => {
   assert.equal(await cache.get(async () => "recovered"), "recovered")
 })
 
+test("Workers requests do not share pending I/O but reuse settled public data", async () => {
+  const cache = createPublicCache<string>(1000, { deduplicate: false })
+  let release!: (value: string) => void
+  const first = cache.get(() => new Promise<string>((resolve) => { release = resolve }))
+  const second = cache.get(async () => "second request")
+  assert.notEqual(first, second)
+  assert.equal(await second, "second request")
+  release("first request")
+  await first
+  assert.equal(await cache.get(async () => "unexpected query"), "first request")
+})
+
 test("authentication limiter isolates clients and resets expired windows", () => {
   const limiter = new WindowRateLimiter(2)
   assert.equal(limiter.take("a", 2, 1000, 0).allowed, true)
