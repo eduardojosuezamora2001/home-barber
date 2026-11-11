@@ -7,17 +7,23 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "turbo format",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "deploy:backend": "pnpm --filter @home/backend run typecheck && node scripts/deploy-backend.mjs",
+    "deploy:frontend": "pnpm --filter web run build:pages && wrangler pages deploy --cwd apps/web --branch deploy-cloudflare",
+    "cf:types": "wrangler types cloudflare-env.d.ts --cwd apps/backend --env-interface BackendEnv --include-runtime=false && wrangler types cloudflare-env.d.ts --cwd apps/web --env-interface PagesEnv --include-runtime=false",
+    "check:cloudflare": "pnpm --filter @home/backend run typecheck && node scripts/deploy-backend.mjs --dry-run && pnpm --filter web run build:pages && wrangler pages functions build --cwd apps/web --build-output-directory dist --outfile .wrangler/pages-worker.js"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "5.20261110.1",
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "sharp": "0.35.5",
     "turbo": "^2.11.10",
-    "typescript": "~6.0.2"
+    "typescript": "~6.0.2",
+    "wrangler": "4.159.0"
   },
   "packageManager": "pnpm@11.25.0",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=22.12.0"
   }
 }

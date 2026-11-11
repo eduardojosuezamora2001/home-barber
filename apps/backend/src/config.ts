@@ -6,6 +6,7 @@ export const config = {
   supabaseSecretKey: process.env.SUPABASE_SECRET_KEY ?? null,
   webOrigin: process.env.WEB_ORIGIN ?? "http://localhost:3000",
   production: process.env.NODE_ENV === "production",
+  cloudflare: process.env.RUNTIME_TARGET === "cloudflare",
   trustedProxyHops: Number(process.env.TRUST_PROXY_HOPS ?? 0),
 }
 

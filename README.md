@@ -4,7 +4,7 @@ Sitio y panel de gestión para una barbería con varias sucursales. Los clientes
 
 ## Ejecutar en desarrollo
 
-Requiere Node 20.19+ y pnpm 11.
+Requiere Node 22.12+ (recomendado Node 24) y pnpm 11.
 
 ```bash
 pnpm install
@@ -12,6 +12,17 @@ pnpm dev
 ```
 
 Abre `http://localhost:3000`. Turbo inicia Vite en el puerto 3000 y la API Hono en el 8787. Vite redirige `/api` a Hono. El navegador solo habla con la API; la conexión a Supabase, la autenticación y las consultas a la base de datos viven en [`apps/backend`](apps/backend/).
+
+## Desplegar en Cloudflare
+
+La configuración de producción publica el backend en Workers y la web en Pages. Tras preparar la cuenta, el origen y el secreto de Supabase según [la guía de Cloudflare](docs/deploy-cloudflare.md), ejecuta desde la raíz:
+
+```bash
+pnpm run deploy:backend
+pnpm run deploy:frontend
+```
+
+Pages conecta `/api` al Worker por un service binding para mantener las sesiones bajo el mismo dominio. Puedes compilar y empaquetar ambos sin publicar con `pnpm run check:cloudflare`.
 
 ## Páginas
 

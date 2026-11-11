@@ -49,6 +49,11 @@ export class WindowRateLimiter {
 }
 
 function peerAddress(c: Context) {
+  // This header is overwritten by our Pages Function; the Worker is binding-only.
+  if (config.cloudflare) {
+    const address = c.req.header("X-Home-Client-IP") ?? c.req.header("CF-Connecting-IP")
+    return address && isIP(address) ? address : "unknown"
+  }
   let peer = "local"
   try { peer = getConnInfo(c).remote.address ?? peer } catch { /* In-process requests have no socket. */ }
   if (!config.trustedProxyHops) return peer

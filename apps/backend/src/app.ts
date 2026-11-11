@@ -31,7 +31,9 @@ app.use("/api/inquiries", limitPublicInquiries)
 for (const [path, role] of [["owner", "owner"], ["manager", "manager"], ["staff", "barber"], ["client", "client"]] as const) {
   app.use(`/api/${path}/*`, async (c, next) => { await requireRole(c, role); await next() })
 }
-app.use("/api/public", compress({ encoding: "gzip", threshold: 1024 }))
+// Cloudflare manages response compression; a gzipped binding response can be
+// encoded again by Pages. Only the standalone Node server compresses here.
+if (!config.cloudflare) app.use("/api/public", compress({ encoding: "gzip", threshold: 1024 }))
 app.use("/api/public", etag({ weak: true }))
 
 app.onError((error, c) => {
